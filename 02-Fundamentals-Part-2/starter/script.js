@@ -1,11 +1,22 @@
 'use strict';
 
-let hasDriversLicense = false;
-const passTest = true;
+// Function Declaration
+function logger() {
+  console.log('My name is Jonas');
+}
 
-if(passTest) hasDriversLicense = true;
-if(hasDriversLicense) console.log('I can drive');
+logger(); // My name is Jonas
+logger(); // My name is Jonas
+logger(); // My name is Jonas
 
-//const interface = 'Audio';
-//const private = 345; // private is a reserved word
-//const if = 23; // if is a reserved word
+function fruitProcessor(apples, oranges) {
+  console.log(apples, oranges);
+  const juice = `Juice with ${apples} apples and ${oranges} oranges.`;
+  return juice;
+}
+
+const appleJuice = fruitProcessor(5, 0);
+console.log(appleJuice);
+
+const appleOrangeJuice = fruitProcessor(2,4);
+console.log(appleOrangeJuice);
