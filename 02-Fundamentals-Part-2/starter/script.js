@@ -1,15 +1,20 @@
 'use strict';
 
-// Function Declaration`
-function cutFruitPieces(fruit) {
-    return fruit * 4;
+// Function Declaration
+
+const calcAge1 = function (birthYear) {
+    return 2037 - birthYear;
 }
 
-function fruitProcessor(apples, oranges) {
-  const applePieces = cutFruitPieces(apples);
-  const orangePieces = cutFruitPieces(oranges);
-  const juice = `Juice with ${applePieces} piece of apples and ${orangePieces} pieces of oranges.`;
-  return juice;
+const yearsUntilRetirement = function (birthYear, firstName) {
+    const age = calcAge1(birthYear);
+    const retirement = 65 - age;
+    if (retirement > 0) {
+        console.log(`${firstName} retires in ${retirement} years`);
+        return retirement;
+    } else {
+        console.log(`${firstName} is already retired`);
+        return -1;
+    }
 }
-
-console.log(fruitProcessor(2,3));
+yearsUntilRetirement(1991, 'Jonas');
