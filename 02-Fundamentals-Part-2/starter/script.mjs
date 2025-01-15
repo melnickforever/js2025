@@ -1,66 +1,38 @@
 /* Write your code below. Good luck! 🙂 */
 'use strict';
-/**
- * Calculates the tip based on the bill amount.
- * @param {number} bill - The bill amount.
- * @returns {number} The calculated tip.
- */
-const calcTip = (bill) => (bill >= 50 && bill <= 300) ? bill * 0.15 : bill * 0.2;
 
-/**
- * An array of bill amounts.
- * @type {number[]}
- */
-const bills = [125, 555, 44];
+const jonas = {
+  firstName: 'Jonas',
+    lastName: 'Schmedtmann',
+    birthYear: 2037 - 1991,
+    job: 'teacher',
+    friends: ['Michael', 'Peter', 'Steven']
+}
 
-/**
- * An array of calculated tips for each bill.
- * @type {number[]}
- */
-const tips = [calcTip(bills[0]), calcTip(bills[1]), calcTip(bills[2])];
+console.log(jonas);
+console.log(jonas.firstName);
+console.log(jonas['lastName']);
 
-/**
- * An array of total amounts (bill + tip) for each bill.
- * @type {number[]}
- */
-const totals = [tips[0] + bills[0], tips[1] + bills[1], tips[2] + bills[2]];
+const nameKey = 'Name';
+console.log(jonas['first' + nameKey]);
+console.log(jonas['last' + nameKey]);
 
-/**
- * An array of total amounts (bill + tip) for each bill, calculated using the map method.
- * @type {number[]}
- */
-const totals2 = bills.map(
-    (bill, index) => bill + tips[index]
-);
+const interestedIn = prompt('What do you want to know about Jonas? ' +
+       'Choose between firstName, lastName, birthYear, job, and friends');
+if (jonas[interestedIn]) {
+  console.log(jonas[interestedIn]);
+}
+else {
+    console.log('Wrong request! Choose between firstName,' +
+                ' lastName, birthYear, job, and friends');
+}
 
-console.log(tips, totals, totals2);
+jonas.location = 'Portugal';
+jonas['twitter'] = '@jonasschmedtman';
+console.log(jonas);
 
-import { expect } from 'chai';
+// Challenge
+// "Jonas has 3 friends, and his best friend is called Michael"
+console.log(`${jonas.firstName} has ${jonas.friends.length} friends, and his best friend is called ${jonas.friends[0]}`);
 
-describe('calcTip', () => {
-  it('calculates 15% tip for bills between 50 and 300', () => {
-    expect(calcTip(100)).to.equal(15);
-  });
 
-  it('calculates 20% tip for bills less than 50', () => {
-    expect(calcTip(40)).to.equal(8);
-  });
-
-  it('calculates 20% tip for bills greater than 300', () => {
-    expect(calcTip(400)).to.equal(80);
-  });
-});
-
-describe('bills, tips, and totals arrays', () => {
-  it('calculates tips correctly for each bill', () => {
-    expect(tips).to.deep.equal([18.75, 111, 8.8]);
-  });
-
-  it('calculates totals correctly for each bill', () => {
-    expect(totals).to.deep.equal([143.75, 666, 52.8]);
-  });
-
-  it('calculates totals2 correctly using map method', () => {
-    expect(totals2).to.deep.equal([143.75, 666, 52.8]);
-  });
-});
