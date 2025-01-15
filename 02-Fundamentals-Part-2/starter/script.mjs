@@ -1,23 +1,26 @@
 'use strict';
- const friends = ['Michael', 'Steven', 'Peter'];
- console.log(friends);
- const years = new Array(1991, 1984, 2008, 2020);
- console.log(years.length);
- console.log(friends[friends.length - 1]);
- friends[2] = 'Jay';
- friends.push('John');
+
+const friends = ['Michael', 'Steven', 'Peter'];
+const newLength = friends.push('Jay');
+console.log(friends);
+console.log(newLength);
+
+
+friends.unshift('John');
 console.log(friends);
 
-const firstName = 'Jonas';
-const jonas = [firstName, 'Schmedtmann', 2037 - 1991, 'teacher', friends];
-console.log(jonas.length);
+const popped = friends.pop();
+console.log(popped);
+friends.shift();
+console.log(friends);
 
-//Exercise
-const calcAge = function (birthYear) {
-    return 2037 - birthYear;
+console.log(friends.indexOf('Steven'));
+console.log(friends.indexOf('Bob'));
+
+friends.push('Piter');
+console.log(friends.includes('Steven'));
+console.log(friends.includes('23'));
+
+if (friends.includes('Piter')) {
+    console.log('You have a friend called Piter');
 }
-const myYears  = [1990, 1967, 2002, 2010, 2018];
-console.log(calcAge(myYears[0]));
-
-const ages = [calcAge(myYears[0]), calcAge(myYears[1]), calcAge(myYears[2])];
-console.log(ages);
