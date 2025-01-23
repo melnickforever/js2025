@@ -1,37 +1,32 @@
-console.log(me);
-//console.log(job);
-//console.log(year);
+'use strict';
+console.log(this); // Window
 
-var me = 'Jonas';
-let job = 'teacher';
-const year = 1991;
-
-// Functions
-console.log(addDecl(2, 3));
-//console.log(addExpr(2, 3));
-//console.log(addArrow(2, 3));
-
-function addDecl(a, b) {
-    return a + b;
+const calcAge = function (birthYear) {
+    console.log(2037 - birthYear);
+    console.log(this); // undefined
 }
+calcAge(1991);
 
-var addExpr = function (a, b) {
-    return a + b;
-};
-
-var addArrow = (a, b) => a + b;
-
-// Example
-if (!numProducts) {
-    deleteShoppingCart();
+const calcAgeArrow = birthYear => {
+    console.log(2037 - birthYear);
+    console.log(this); // undefined
 }
+calcAgeArrow(1980);
 
-var numProducts = 10;
-
-function deleteShoppingCart() {
-    console.log('All products deldeted!');
+const jonas = {
+    year: 1991,
+    calcAge: function () {
+        console.log(this);
+        console.log(2037 - this.year);
+    }
 }
+jonas.calcAge();
 
-var x = 1;
-let y = 2;
-const z = 3;
+const matilda = {
+    year: 2017,
+}
+matilda.calcAge = jonas.calcAge;
+matilda.calcAge();
+
+const f = jonas.calcAge;
+f();
