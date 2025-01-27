@@ -36,7 +36,12 @@ addExpr(2, 5);
 addExpr(2, 5, 8, 12);
 
 var addArrow = (a, b) => {
-    console.log(arguments);
+    //console.log(arguments);
     return a + b;
 }
 addArrow(2, 5, 8); // arguments is not available in arrow functions
+
+let a = [1, 2, 3, 4];
+let b = a;
+a[0] = 5;
+console.log(a, b);
