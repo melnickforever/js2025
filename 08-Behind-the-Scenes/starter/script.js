@@ -1,47 +1,55 @@
 'use strict';
 
-var firstName = 'Matilda';
-
-const jonas = {
-    firstName: 'Jonas',
-    year: 1991,
+const jessica1 = {
+    firstName: 'Jessica',
+    lastName: 'Williams',
+    year: 1996,
     calcAge: function () {
-        //console.log(this);
+        console.log(this);
         console.log(2037 - this.year);
-
-        // const self = this; // self or that
-        // const isMillenial = function () {
-        //     console.log(self);
-        //     console.log(self.year >= 1981 && self.year <= 1996);
-        // }
-
-        const isMillenial = () => {
-            console.log(this);
-            console.log(this.year >= 1981 && this.year <= 1996);
-        }
-
-        isMillenial();
     },
-
-    greet: () => console.log(`Hey ${this.firstName}`), // this is undefined
+    greet: () => {
+        console.log(this);
+        console.log(`Hey ${this.firstName}`);
+    },
 }
-jonas.greet();
-jonas.calcAge();
 
-const addExpr = function (a, b) {
-    console.log(arguments);
-    return a + b;
-}  // arguments is not available in arrow functions
-addExpr(2, 5);
-addExpr(2, 5, 8, 12);
-
-var addArrow = (a, b) => {
-    //console.log(arguments);
-    return a + b;
+function marryPerson(originalPerson, newLastName) {
+    originalPerson.lastName = newLastName;
+    return originalPerson
 }
-addArrow(2, 5, 8); // arguments is not available in arrow functions
 
-let a = [1, 2, 3, 4];
-let b = a;
-a[0] = 5;
-console.log(a, b);
+const marriedJessica = marryPerson(jessica1, 'Devis');
+
+// const marriedJessica = jessica;
+// marriedJessica.firstName = 'Devis';
+
+console.log('before:', jessica1);
+console.log('after:', marriedJessica);
+
+const jessica = {
+    firstName: 'Jessica',
+    lastName: 'Williams',
+    age: 27,
+    family: ['Alice', 'Bob'],
+}
+
+// shallow copy
+const jessicaCopy = {...jessica};
+jessicaCopy.lastName = 'Davis';
+
+console.log(jessica, jessicaCopy);
+
+// jessicaCopy.family.push('Mary');
+// jessicaCopy.family.push('John');
+//
+// console.log('before:', jessica);
+// console.log('after:', jessicaCopy);
+
+// Deep copy
+const jessicaClone = structuredClone(jessica);
+jessicaClone.family.push('Mary');
+jessicaClone.family.push('John');
+
+console.log('Original:', jessica);
+console.log('Clone:', jessicaClone);
