@@ -56,40 +56,17 @@ const restaurant = {
     },
 };
 
-restaurant.orderDelivery(
-    {
-        time: '12:30',
-        address: 'Via del Sole, 21',
-        mainIndex: 2,
-        starterIndex: 2
-    }
-);
+const arr = [7, 8, 9];
+const badNewArr = [1, 2, arr[0], arr[1], arr[2]];
 
-restaurant.orderDelivery(
-    {
-        address: 'Via del Sole, 21',
-        starterIndex: 1
-    }
-);
+const newArr = [1, 2, ...arr];
+console.log(newArr);
+console.log(...newArr);
 
-const {name, openingHours, categories} = restaurant;
-console.log(name, openingHours, categories);
+const newMenu = [...restaurant.mainMenu, 'Gnocci'];
+console.log(newMenu);
 
-const {name: restaurantName, openingHours: hours, categories: tags} = restaurant;
+const mainMenuCopy = [...restaurant.mainMenu];
 
-console.log(restaurantName, hours, tags);
-
-const {menu = [], starterMenu: starters = []} = restaurant;
-console.log(menu, starters);
-
-let a = 111;
-let b = 999;
-const obj = {a: 23, b: 7, c: 14};
-({a, b} = obj);
-console.log(a, b);
-
-const {
-    fri: {open: o, close: c},
-} = openingHours;
-
-console.log(o, c);
+const menu = [...restaurant.starterMenu, ...restaurant.mainMenu];
+console.log(menu);
