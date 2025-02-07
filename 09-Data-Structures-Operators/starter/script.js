@@ -43,12 +43,4 @@ const restaurant = {
 
 console.log(restaurant);
 
-const menu = [...restaurant.starterMenu, ...restaurant.mainMenu];
-
-for (const item of menu) {
-    console.log(item);
-}
-
-for (const [i, item] of menu.entries()) {
-    console.log(i, item);
-}
+console.log(restaurant.openingHours.mon?.open);
