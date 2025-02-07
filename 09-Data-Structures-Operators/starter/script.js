@@ -40,6 +40,11 @@ const restaurant = {
         );
     },
 
+    orderPizza(mainIngredient, ...otherIngredients) {
+        console.log(mainIngredient);
+        console.log(otherIngredients);
+    },
+
     openingHours: {
         thu: {
             open: 12,
@@ -56,24 +61,9 @@ const restaurant = {
     },
 };
 
-const arr = [7, 8, 9];
-const badNewArr = [1, 2, arr[0], arr[1], arr[2]];
+const arr = [1, 2, ...[3, 4]];
 
-const newArr = [1, 2, ...arr];
-console.log(newArr);
-console.log(...newArr);
+const [a, b, ...others] = [1, 2, 3, 4, 5];
+console.log(a, b, others);
 
-const newMenu = [...restaurant.mainMenu, 'Gnocci'];
-console.log(newMenu);
-
-const mainMenuCopy = [...restaurant.mainMenu];
-
-const menu = [...restaurant.starterMenu, ...restaurant.mainMenu];
-console.log(menu);
-
-const newRestaurant = {...restaurant, foundedIn: 1998, founder: 'Guiseppe'};
-console.log(newRestaurant);
-
-const restaurantCopy = {...restaurant};
-restaurantCopy.name = 'Ristorante Roma';
-console.log(restaurantCopy, restaurant);
+restaurant.orderPizza('mushrooms', 'onion', 'olives', 'spinach');
