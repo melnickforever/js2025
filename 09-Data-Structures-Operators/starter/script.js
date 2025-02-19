@@ -63,3 +63,6 @@ for (const [key, val] of question) {
 // Convert map to array
 console.log([...question]);
 console.log([...question.entries()]);
+
+const uarr = [1, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+const unique = new Set(uarr);
