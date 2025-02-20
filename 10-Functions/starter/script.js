@@ -1,29 +1,27 @@
 'use strict';
 
-const flight = 'LH234';
-const jonas = {
-    name: 'Jonas Schmedtmann',
-    passport: 24739479284,
+const oneWord = function (str) {
+    return str.replace(/ /g, '').toLowerCase();
 }
 
-const checkIn = function (flightNum, passenger) {
-    flightNum = 'LH999';
-    passenger.name = 'Mr. ' + passenger.name;
-
-    if (passenger.passport === 24739479284) {
-        alert('Check in');
-    } else {
-        alert('Wrong passpoer!');
-    }
+const upperFirstWord = function (str) {
+    const [first, ...others] = str.split(' ');
+    return [first.toLocaleUpperCase(), ...others].join()
 }
 
-// checkIn(flight, jonas);
-// console.log(flight);
-// console.log(jonas);
-
-const newPassport = function (person) {
-    person.passport = Math.trunc(Math.random() * 100000000000);
+const trasformer = function (str, fn) {
+    console.log(`Original string: ${str}`);
+    console.log(`Transformed string: ${fn(str)}`);
+    console.log(`Transformed by: ${fn.name}`);
 }
 
-newPassport(jonas);
-checkIn(flight, jonas);
+trasformer('Javasvript is the best!', upperFirstWord);
+
+trasformer('Javasvript is the best!', oneWord);
+
+const high5 = function () {
+    console.log('👋');
+}
+document.body.addEventListener('click', high5);
+
+['Jonas', 'Martha', 'Adam'].forEach(high5);
