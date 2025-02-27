@@ -1,5 +1,5 @@
 'use strict';
-
+/*
 const secureBooking = function () {
     let passengerCount = 0;
 
@@ -14,3 +14,16 @@ booker();
 booker();
 booker();
 console.dir(booker);
+
+ */
+
+let f;
+const g = function () {
+    const a = 23;
+    f = function () {
+        console.log(a * 2);
+    }
+}
+
+g();
+f();
