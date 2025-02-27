@@ -75,17 +75,10 @@ const inputClosePin = document.querySelector('.form__input--pin');
 
 /////////////////////////////////////////////////
 
-const currencies = new Map([
-                               ['USD', 'United States dollar'],
-                               ['EUR', 'Euro'],
-                               ['GBP', 'Pound sterling'],
-                           ]);
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
-currencies.forEach(function (value, key, map) {
-    console.log(`${key}: ${value}`);
+const eurToUsd = 1.1;
+const usMovments = movements.map(function (mov) {
+    return mov * eurToUsd;
 });
-
-const currenciesUnique = new Set(['USD', 'GBP', 'USD', 'EUR', 'EUR']);
-currenciesUnique.forEach(function (value, key, map) {
-    console.log(`${key}: ${value}`);
-});
+console.log(movements, usMovments);
