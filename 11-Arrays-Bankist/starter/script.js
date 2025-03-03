@@ -76,9 +76,11 @@ const inputClosePin = document.querySelector('.form__input--pin');
 /////////////////////////////////////////////////
 
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+movements.forEach((movement, index, array) => console.log(movement * 2));
+let g = movements.map((movement, index, array) => movement * 2);
+console.log(g);
 
-const eurToUsd = 1.1;
-const usMovments = movements.map(function (mov) {
-    return mov * eurToUsd;
-});
-console.log(movements, usMovments);
+//const arr = [[1, 2, 3], [4, 5, 6], 7, 8];
+const arr = [...g];
+g[0] = 50;
+console.log(g, arr);
