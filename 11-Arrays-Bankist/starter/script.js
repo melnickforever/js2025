@@ -75,12 +75,12 @@ const inputClosePin = document.querySelector('.form__input--pin');
 
 /////////////////////////////////////////////////
 
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
-movements.forEach((movement, index, array) => console.log(movement * 2));
-let g = movements.map((movement, index, array) => movement * 2);
-console.log(g);
-
-//const arr = [[1, 2, 3], [4, 5, 6], 7, 8];
-const arr = [...g];
-g[0] = 50;
-console.log(g, arr);
+const calcAverageHumanAge = function (ages) {
+    const humanAges = ages.map(age => (age <= 2 ? 2 * age : 16 + age * 4));
+    console.log(humanAges);
+    const adults = humanAges.filter(age => age >= 18);
+    console.log(adults);
+    const average = adults.reduce((acc, age) => acc + age, 0) / adults.length;
+    console.log(average);
+}
+calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3]);
