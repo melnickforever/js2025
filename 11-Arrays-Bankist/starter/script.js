@@ -75,20 +75,6 @@ const inputClosePin = document.querySelector('.form__input--pin');
 
 /////////////////////////////////////////////////
 
-const calcAverageHumanAge = function (ages) {
-    const humanAges = ages.map(age => (age <= 2 ? 2 * age : 16 + age * 4));
-    console.log(humanAges);
-    const adults = humanAges.filter(age => age >= 18);
-    console.log(adults);
-    const average = adults.reduce((acc, age) => acc + age, 0) / adults.length;
-    console.log(average);
-}
-calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3]);
-
-const modernAverage = function (ages) {
-    const modernAverage = ages.map(age => (age <= 2 ? 2 * age : 16 + age * 4))
-        .filter(age => age >= 18)
-        .reduce((acc, age, i, arr) => acc + age / arr.length, 0);
-    console.log(modernAverage);
-}
-modernAverage([5, 2, 4, 1, 15, 8, 3]);
+const arr = Array.from({length: 1000}, () => Math.trunc(Math.random() * 6 + 1));
+console.log(arr.splice());
+console.log(arr);
