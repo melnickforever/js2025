@@ -251,3 +251,24 @@ btnSort.addEventListener('click', function (e) {
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
+console.log(23 === 23.0);
+console.log(22_000_000);
+
+const money = new Intl.NumberFormat("en-US").format(1000);
+console.log(money);
+
+const ingredients = ['olives', 'spinach'];
+const pizzaTimer = setTimeout((ing1, ing2) => {
+    console.log(`Here is your pizza with ${ing1} and ${ing2}`);
+}, 3000, ...ingredients);
+console.log('Waiting...');
+if (ingredients.includes('spinach')) {
+    clearTimeout(pizzaTimer);
+}
+
+// setTimeout
+setInterval(function () {
+    console.clear();
+    const now = new Date();
+    console.log(`${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`);
+}, 1000);
