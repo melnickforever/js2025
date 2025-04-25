@@ -30,3 +30,6 @@ document.addEventListener('keydown', function (e) {
         closeModal();
     }
 });
+const logo = document.querySelector('.nav__logo');
+const nav = document.querySelector('.nav');
+logo.getAttribute('src');
