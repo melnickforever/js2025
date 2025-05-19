@@ -38,4 +38,5 @@ Person.prototype.species = 'Homo Sapiens';
 console.log(jonas.species, matilda.species);
 
 console.log(jonas.hasOwnProperty('firstName'));
+// in prototype not in object
 console.log(jonas.hasOwnProperty('species'));
