@@ -2,16 +2,20 @@
 
 ///////////////////////////////////////
 // Modal window
-
-const h1 = document.querySelector('h1');
-// Selecting elements: child
-console.log(h1.document.querySelector('.highlight'))
-console.log(h1.childNodes);
-console.log(h1.children);
-h1.firstElementChild.style.color = 'white';
-h1.lastElementChild.style.color = 'ortangered';
-
-// Selecting elements: parent
-console.log(h1.parentNode);
-console.log(h1.parentElement);
-console.log(h1.closest('.header')); 
+const section1 = document.querySelector('#section--1');
+const obsCollback = function (entries, observer) {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            console.log('Section 1 is visible');
+            entry.target.classList.add('section--visible');
+        } else {
+            entry.target.classList.remove('section--visible');
+        }
+    });
+};
+const obsOptions = {
+    root: null,
+    threshold: 0.2,
+};
+const observer = new IntersectionObserver(obsCollback, obsOptions);
+observer.observe(section1);
