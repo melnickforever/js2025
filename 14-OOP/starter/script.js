@@ -61,3 +61,55 @@ console.log(tesla);
 tesla.broke();
 tesla.accelerate();
 tesla.accelerate();
+
+class PersonCL {
+    constructor(fullName, birthYear) {
+        this.fullName = fullName;
+        this.birthYear = birthYear;
+    }
+
+    calcAge() {
+        console.log(2037 - this.birthYear);
+    }
+
+    get age() {
+        return 2037 - this.birthYear;
+    }
+
+    greet() {
+        console.log(`Hey ${this.firstName}`);
+    }
+
+    set fullName(name) {
+        if (name.includes(' ')) {
+            this._fullName = name;
+        }
+    }
+
+    get fullName() {
+        return this._fullName;
+    }
+
+    static hey() {
+        console.log('Hey there');
+    }
+}
+
+class StudentCL extends PersonCL {
+    constructor(fullName, birthYear, course) {
+        super(fullName, birthYear);
+        this.course = course;
+    }
+
+    introduce() {
+        console.log(`My name is ${this.fullName} and I study ${this.course}`);
+    }
+
+    calcAge() {
+        console.log(`I'm`);
+    }
+}
+
+const martha = new StudentCL('Martha Jones', 2012, 'CS');
+martha.introduce();
+martha.calcAge();
