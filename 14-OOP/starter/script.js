@@ -1,4 +1,17 @@
 'use strict';
+const Person = function (firstName, birthYear) {
+    console.log(this);
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+}
+
+const dima = new Person('Dima', 1986);
+Person.hey = function () {
+    console.log(this);
+    console.log('Hey there');
+}
+
+Person.hey();
 
 // Class expression
 //const PersonCl = class {};
@@ -36,12 +49,17 @@ class PersonCl {
     get fullName() {
         return this._fullName;
     }
+
+    static hey() {
+        console.log('Hey there');
+    }
 }
 
 const jessica = new PersonCl('Jessica Devis', 1996);
 console.log(jessica);
 jessica.calcAge();
 console.log(jessica.__proto__ === PersonCl.prototype);
+PersonCl.hey();
 
 const walter = new PersonCl('Walter White', 1965);
 
