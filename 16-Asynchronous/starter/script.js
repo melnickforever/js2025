@@ -4,6 +4,7 @@ const btn = document.querySelector('.btn-country');
 const countriesContainer = document.querySelector('.countries');
 
 //////////////////////////////
+/*
 // old way of doing things
 const renderCountry = function (data, className = '') {
     console.log("test", data[0]?.languages);
@@ -58,14 +59,52 @@ const getCountryAndNeighbour = function (country) {
 //getCountryAndNeighbour('portugal');
 //getCountryAndNeighbour('asa');
 getCountryAndNeighbour('ukr');
+*/
+// Fetch API
+// const neighbourRequest = new XMLHttpRequest();
+// neighbourRequest.open('GET', `https://restcountries.com/v3.1/alpha/${neighbour}`);
+// neighbourRequest.send();
 
-// NEW COUNTRIES API URL (use instead of the URL shown in videos):
-// https://restcountries.com/v2/name/portugal
+const renderCountry = function (data, className = '') {
+    const languageList = Object.values(data?.languages).join(', ');
+    const currencyList = Object.values(data?.currencies).map(cur => `${cur.name}(${cur.symbol})`).join(', ');
 
-// NEW REVERSE GEOCODING API URL (use instead of the URL shown in videos):
-// https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lng}
-
-// new API URL for weather data
-// https://restcountries.eu/rest/v2/
-// https://countries-api-836d.onrender.com/countries/
-///////////////////////////////////////
+    const html = `
+            <article class="country ${className}">
+          <img class="country__img" src="${data.flags.png}" />
+          <div class="country__data">
+            <h3 class="country__name">${data?.name?.common}</h3>
+            <h4 class="country__region">${data.region}</h4>
+            <p class="country__row"><span>👫</span>${(+data.population / 1000000).toFixed(1)}</p>
+            <p class="country__row"><span>🗣️</span>${languageList}</p>
+            <p class="country__row"><span>💰</span>${currencyList}</p>
+          </div>
+        </article>
+    `;
+    countriesContainer.insertAdjacentHTML('beforeend', html);
+    countriesContainer.style.opacity = 1;
+}
+const getCountryData = function (country) {
+    fetch(`https://restcountries.com/v3.1/name/${country}`)
+        .then(response => response.json())
+        .then(data => {
+            renderCountry(data[0]);
+            const neighbours = data[0]?.borders;
+            if (!neighbours) {
+                return;
+            }
+            return Promise.all(
+                neighbours.map(code =>
+                                   fetch(`https://restcountries.com/v3.1/alpha/${code}`)
+                                       .then(response => response.json())
+                                       .then(data => data[0])
+                ));
+            return fetch(`https://restcountries.com/v3.1/alpha/${neighbours}`);
+        }).then(neighbourCountries => {
+        if (!neighbourCountries) {
+            return;
+        }
+        neighbourCountries.forEach(code => renderCountry(code, 'neighbour'));
+    });
+};
+getCountryData('finland');
