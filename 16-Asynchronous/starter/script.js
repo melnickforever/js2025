@@ -55,9 +55,9 @@ const getCountryAndNeighbour = function (country) {
         });
     });
 }
-//getCountryAndNeighbour('spain');
+getCountryAndNeighbour('portugal');
 //getCountryAndNeighbour('australia');
-getCountryAndNeighbour('ukr');
+// getCountryAndNeighbour('ukr');
 
 // NEW COUNTRIES API URL (use instead of the URL shown in videos):
 // https://restcountries.com/v2/name/portugal
