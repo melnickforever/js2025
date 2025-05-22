@@ -108,7 +108,6 @@ const getCountryData = function (country) {
         neighbourCountries.forEach(code => renderCountry(code, 'neighbour'));
     })
         .catch(err => {
-            ;
             console.error(`${err} 💥💥💥`);
             countriesContainer.insertAdjacentText('beforeend', 'Something went wrong');
             countriesContainer.style.opacity = 1;
