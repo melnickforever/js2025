@@ -5,13 +5,13 @@ const countriesContainer = document.querySelector('.countries');
 
 //////////////////////////////
 // old way of doing things
-const renderCountry = function (data) {
+const renderCountry = function (data, className = '') {
     console.log("test", data[0]?.languages);
     const languageList = Object.values(data?.languages).join(', ');
     const currencyList = Object.values(data?.currencies).map(cur => `${cur.name}(${cur.symbol})`).join(', ');
 
     const html = `
-            <article class="country">
+            <article class="country ${className}">
           <img class="country__img" src="${data.flags.png}" />
           <div class="country__data">
             <h3 class="country__name">${data?.name?.common}</h3>
@@ -33,7 +33,7 @@ function getNeighbour(neighbour) {
     neighbourRequest.addEventListener('load', function () {
         const [data] = JSON.parse(this.responseText);
         //console.log(data);
-        renderCountry(data);
+        renderCountry(data, 'neighbour');
     });
 }
 
@@ -55,9 +55,9 @@ const getCountryAndNeighbour = function (country) {
         });
     });
 }
-getCountryAndNeighbour('portugal');
-//getCountryAndNeighbour('australia');
-// getCountryAndNeighbour('ukr');
+//getCountryAndNeighbour('portugal');
+//getCountryAndNeighbour('asa');
+getCountryAndNeighbour('ukr');
 
 // NEW COUNTRIES API URL (use instead of the URL shown in videos):
 // https://restcountries.com/v2/name/portugal
