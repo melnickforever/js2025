@@ -5,35 +5,59 @@ const countriesContainer = document.querySelector('.countries');
 
 //////////////////////////////
 // old way of doing things
-const getCountryData = function (country) {
-    const request = new XMLHttpRequest();
-    request.open('GET', `https://restcountries.com/v2/name/${country}`);
-    request.send();
-    request.addEventListener('load', function () {
-        console.log(this.responseText);
+const renderCountry = function (data) {
+    console.log("test", data[0]?.languages);
+    const languageList = Object.values(data?.languages).join(', ');
+    const currencyList = Object.values(data?.currencies).map(cur => `${cur.name}(${cur.symbol})`).join(', ');
 
-        const [data] = JSON.parse(this.responseText);
-        console.log(data);
-
-        const html = `
+    const html = `
             <article class="country">
-          <img class="country__img" src="${data.flag}" />
+          <img class="country__img" src="${data.flags.png}" />
           <div class="country__data">
-            <h3 class="country__name">${data.name}</h3>
+            <h3 class="country__name">${data?.name?.common}</h3>
             <h4 class="country__region">${data.region}</h4>
             <p class="country__row"><span>👫</span>${(+data.population / 1000000).toFixed(1)}</p>
-            <p class="country__row"><span>🗣️</span>${data.languages[0].name}</p>
-            <p class="country__row"><span>💰</span>${data.currencies[0].name}</p>
+            <p class="country__row"><span>🗣️</span>${languageList}</p>
+            <p class="country__row"><span>💰</span>${currencyList}</p>
           </div>
         </article>
     `;
-        countriesContainer.insertAdjacentHTML('beforeend', html);
-        countriesContainer.style.opacity = 1;
+    countriesContainer.insertAdjacentHTML('beforeend', html);
+    countriesContainer.style.opacity = 1;
+}
+
+function getNeighbour(neighbour) {
+    const neighbourRequest = new XMLHttpRequest();
+    neighbourRequest.open('GET', `https://restcountries.com/v3.1/alpha/${neighbour}`);
+    neighbourRequest.send();
+    neighbourRequest.addEventListener('load', function () {
+        const [data] = JSON.parse(this.responseText);
+        //console.log(data);
+        renderCountry(data);
     });
 }
-getCountryData('portugal');
-getCountryData('usa');
-getCountryData('ukr');
+
+const getCountryAndNeighbour = function (country) {
+    const request = new XMLHttpRequest();
+    request.open('GET', `https://restcountries.com/v3.1/name/${country}`);
+    request.send();
+    request.addEventListener('load', function () {
+        const [data] = JSON.parse(this.responseText);
+        renderCountry(data);
+        //get neighbor country
+        const neighbours = data?.borders;
+        if (!neighbours) {
+            return;
+        }
+        // Get neighbour country
+        neighbours.forEach((neighbour) => {
+            getNeighbour(neighbour);
+        });
+    });
+}
+//getCountryAndNeighbour('spain');
+//getCountryAndNeighbour('australia');
+getCountryAndNeighbour('ukr');
 
 // NEW COUNTRIES API URL (use instead of the URL shown in videos):
 // https://restcountries.com/v2/name/portugal
