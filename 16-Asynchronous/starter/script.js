@@ -104,6 +104,7 @@ const getCountryData = function (country) {
         if (!neighbourCountries) {
             return;
         }
+
         neighbourCountries.forEach(code => renderCountry(code, 'neighbour'));
     });
 };
