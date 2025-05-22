@@ -99,7 +99,7 @@ const getCountryData = function (country) {
                                        .then(response => response.json())
                                        .then(data => data[0])
                 ));
-            return fetch(`https://restcountries.com/v3.1/alpha/${neighbours}`);
+           
         }).then(neighbourCountries => {
         if (!neighbourCountries) {
             return;
@@ -108,4 +108,4 @@ const getCountryData = function (country) {
         neighbourCountries.forEach(code => renderCountry(code, 'neighbour'));
     });
 };
-getCountryData('finland');
+getCountryData('usa');
