@@ -99,13 +99,22 @@ const getCountryData = function (country) {
                                        .then(response => response.json())
                                        .then(data => data[0])
                 ));
-           
+
         }).then(neighbourCountries => {
         if (!neighbourCountries) {
             return;
         }
 
         neighbourCountries.forEach(code => renderCountry(code, 'neighbour'));
-    });
+    })
+        .catch(err => {
+            ;
+            console.error(`${err} 💥💥💥`);
+            countriesContainer.insertAdjacentText('beforeend', 'Something went wrong');
+            countriesContainer.style.opacity = 1;
+        });
 };
-getCountryData('usa');
+btn.addEventListener('click', function () {
+    getCountryData('usa');
+});
+
