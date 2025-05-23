@@ -105,23 +105,22 @@ const getCountryData = function (country) {
             }
             return Promise.all(
                 neighbours.map(code =>
-                                   fetch(`https://restcountries.com/v3.1/alpha/${code}`)
-                                       .then(response => {
-                                           if (!response.ok) {
-                                               throw new Error(`Neighbour country not found (${response.status})`);
-                                           }
-                                           return response.json()
-                                       })
-                                       .then(data => data[0])
-                ));
-
+                                   fetch(`https://restcountries.com/v3.1/alpha/${code}`)));
         })
+        .then(responses => {
+            let responseList = [];
+            responses.forEach(response => {
+                if (!response.ok) {
+                    throw new Error(`Neighbour country not found (${response.status})`);
+                }
+                responseList.push(response.json());
+            });
 
+            return responseList;
+        })
+        .then(data => Promise.all(data))
+        .then(data => data.map(item => item[0]))
         .then(neighbourCountries => {
-            if (!neighbourCountries) {
-                return;
-            }
-
             neighbourCountries.forEach(code => renderCountry(code, 'neighbour'));
         })
         .catch(err => {
