@@ -84,9 +84,19 @@ const renderCountry = function (data, className = '') {
     countriesContainer.insertAdjacentHTML('beforeend', html);
     countriesContainer.style.opacity = 1;
 }
+
+const renderError = function (msg) {
+    countriesContainer.insertAdjacentText('beforeend', msg);
+    countriesContainer.style.opacity = 1;
+};
 const getCountryData = function (country) {
     fetch(`https://restcountries.com/v3.1/name/${country}`)
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Country not found (${response.status})`);
+            }
+            return response.json();
+        })
         .then(data => {
             renderCountry(data[0]);
             const neighbours = data[0]?.borders;
@@ -96,21 +106,27 @@ const getCountryData = function (country) {
             return Promise.all(
                 neighbours.map(code =>
                                    fetch(`https://restcountries.com/v3.1/alpha/${code}`)
-                                       .then(response => response.json())
+                                       .then(response => {
+                                           if (!response.ok) {
+                                               throw new Error(`Neighbour country not found (${response.status})`);
+                                           }
+                                           return response.json()
+                                       })
                                        .then(data => data[0])
                 ));
 
-        }).then(neighbourCountries => {
-        if (!neighbourCountries) {
-            return;
-        }
+        })
 
-        neighbourCountries.forEach(code => renderCountry(code, 'neighbour'));
-    })
+        .then(neighbourCountries => {
+            if (!neighbourCountries) {
+                return;
+            }
+
+            neighbourCountries.forEach(code => renderCountry(code, 'neighbour'));
+        })
         .catch(err => {
             console.error(`${err} 💥💥💥`);
-            countriesContainer.insertAdjacentText('beforeend', 'Something went wrong');
-            countriesContainer.style.opacity = 1;
+            renderError(`Something went wrong 💥 ${err.message}. Try again!`);
         });
 };
 btn.addEventListener('click', function () {
