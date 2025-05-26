@@ -172,3 +172,30 @@ const getPosition = function () {
 }
 
 getPosition().then(pos => console.log(pos));
+
+// Async/Await
+const whereAmI = async function (country) {
+    try {
+        const pos = await getPosition();
+        const {latitude: lat, longitude: lng} = pos.coords;
+        console.log(`You are at ${lat}°N, ${lng}°E`);
+
+        const res = await fetch(`https://restcountries.com/v3.1/name/${country}`);
+        if (!res.ok) {
+            throw new Error('Country not found');
+        }
+        const data = await res.json();
+        console.log("data", data);
+        return `You are in ${data[0].name.common}, which is located in ${data[0].region}.`;
+        //renderCountry(data[0]);
+    } catch (err) {
+        console.error(`${err} 💥💥💥`);
+        renderError(`Something went wrong 💥 ${err.message}. Try again!`);
+        throw err;
+    }
+}
+whereAmI('Portugal')
+    .then(city => console.log(`2: ${city}`))
+    .catch(err => console.error(`2: ${err.message}`))
+    .finally(() => console.log('3: Finished getting location'));
+console.log('First line after calling whereAmI');
