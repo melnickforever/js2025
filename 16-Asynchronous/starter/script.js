@@ -132,3 +132,29 @@ btn.addEventListener('click', function () {
     getCountryData('usa');
 });
 
+// own promise
+const lotteryPromise = new Promise(function (resolve, reject) {
+    console.log('Lottery draw is happening...');
+    setTimeout(function () {
+        if (Math.random() >= 0.5) {
+            resolve('You WIN!');
+        } else {
+            reject(new Error('You lost your money!'));
+        }
+    }, 2000);
+}).then(result => {
+    console.log(result);
+}).catch(err => console.error(err.message));
+
+const wait = function (seconds) {
+    return new Promise(function (resolve) {
+        setTimeout(resolve, seconds * 1000);
+    });
+}
+wait(2).then(() => {
+    console.log('I waited for 2 seconds');
+    return wait(1);
+}).then(() => console.log('I waited for 1 seconds'));
+
+Promise.resolve('Resolved promise').then(x => console.log(x));
+Promise.reject(new Error('Rejected promise')).catch(x => console.error(x.message));
