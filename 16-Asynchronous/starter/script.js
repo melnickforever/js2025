@@ -64,7 +64,7 @@ getCountryAndNeighbour('ukr');
 // const neighbourRequest = new XMLHttpRequest();
 // neighbourRequest.open('GET', `https://restcountries.com/v3.1/alpha/${neighbour}`);
 // neighbourRequest.send();
-
+/*
 const renderCountry = function (data, className = '') {
     const languageList = Object.values(data?.languages).join(', ');
     const currencyList = Object.values(data?.currencies).map(cur => `${cur.name}(${cur.symbol})`).join(', ');
@@ -158,3 +158,17 @@ wait(2).then(() => {
 
 Promise.resolve('Resolved promise').then(x => console.log(x));
 Promise.reject(new Error('Rejected promise')).catch(x => console.error(x.message));
+*/
+
+// navigator.geolocation.getCurrentPosition(
+//     position => console.log(position),
+//     err => console.error(err));
+
+console.log('Getting your location...');
+const getPosition = function () {
+    return new Promise(function (resolve, reject) {
+        navigator.geolocation.getCurrentPosition(resolve, reject);
+    });
+}
+
+getPosition().then(pos => console.log(pos));
