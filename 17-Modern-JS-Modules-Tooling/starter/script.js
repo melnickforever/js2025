@@ -9,7 +9,7 @@
 // //console.log(ShoppingCart);
 // ShoppingCart.addToCart('bread', 5);
 // console.log(ShoppingCart.totalPrice, ShoppingCart.tq);
-
+/*
 import Shipping from './shoppingCart.js';
 // Importing module
 console.log('Importing Module');
@@ -36,3 +36,32 @@ console.log(lastPost);
 
 const lastPost2 = await getLastPost();
 console.log(lastPost2);
+*/
+
+const ShoppingCart2 = (function () {
+    const cart = [];
+    const shippingCost = 10;
+    const totalPrice = 237;
+    const totalQuantity = 23;
+
+    const addToCart = function (product, quantity) {
+        cart.push({product, quantity});
+        console.log(`${quantity} ${product} added to cart.`);
+    };
+
+    const orderStock = function (product, quantity) {
+        console.log(`${quantity} ${product} ordered from suplier.`);
+    };
+
+    // Return to public
+    return {
+        addToCart,
+        cart,
+        totalPrice,
+        totalQuantity,
+    };
+})();
+
+ShoppingCart2.addToCart('bread', 5);
+ShoppingCart2.addToCart('apple', 4);
+console.log(ShoppingCart2);
