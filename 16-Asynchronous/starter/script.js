@@ -261,7 +261,7 @@ Promise.race([
     .catch(err => console.error(err.message));
 */
 // Promise.allSettled
-
+/*
 Promise.allSettled([
                        Promise.resolve('Success'),
                        Promise.reject('Error'),
@@ -280,3 +280,31 @@ Promise.any([
                 Promise.resolve('Success222'),
                 Promise.resolve('Success2'),
             ]).then(res => console.log(res));
+*/
+const imgContainer = document.querySelector('.images');
+const createImage = function (imgPath) {
+    return new Promise(function (resolve, reject) {
+        const img = document.createElement('img');
+        img.src = imgPath;
+
+        img.addEventListener('load', function () {
+            imgContainer.append(img);
+            resolve(img);
+        });
+
+        img.addEventListener('error', function () {
+            reject(new Error('Image not found'));
+        });
+    });
+};
+const loadAll = async function (imgArr) {
+    imgArr.map(img => {
+        createImage(img)
+            .then(img => {
+                img.classList.add('parallel');
+            })
+            .catch(err => console.error(err.message));
+    });
+}
+
+loadAll(['img/img-1.jpg', 'img/img-2.jpg', 'img/img-3.jpg']);
