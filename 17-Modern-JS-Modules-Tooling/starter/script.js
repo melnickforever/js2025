@@ -93,3 +93,10 @@ if (module.hot) {
     module.hot.accept();
     console.log('Hot Module Replacement');
 }
+
+import 'core-js/stable';
+// import 'core-js/stable/array/find';
+// import 'core-js/stable/promise';
+
+// polyfills for async functions
+import 'regenerator-runtime/runtime'
